@@ -1,0 +1,7 @@
+<a *ngFor="let verse of book.verses" class="col-1-4">
+    <a *ngFor="let word of verse.text" class="col-1-4">
+        
+        <div [hidden]="(word.id == selected_word)" class="word" (click)="selectWord(word)">{{word.value}}</div>
+        <div [hidden]="!(word.id == selected_word)" class="word selected" (click)="selectWord(word)">{{word.value}}</div>
+      </a>
+  </a>

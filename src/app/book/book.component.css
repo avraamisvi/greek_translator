@@ -1,0 +1,8 @@
+div.word {
+    float: left;
+    margin-left: 5px;
+}
+
+div.selected {
+    background-color: lightblue;
+}
