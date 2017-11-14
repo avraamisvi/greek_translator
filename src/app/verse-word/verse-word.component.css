@@ -1,0 +1,16 @@
+div.word {
+    float: left;
+    margin-left: 5px;
+}
+
+div.word:hover {
+    background-color: cadetblue! important;
+}
+
+div.selected {
+    background-color: lightblue! important;
+}
+
+div.selected:hover {
+    background-color: brown! important;
+}

@@ -1,28 +1,5 @@
-<a *ngFor="let verse of book.verses" class="col-1-4">
-    <a *ngFor="let word of verse.text" class="col-1-4">
-        
-        <div [hidden]="(selected_word != null && word.id == selected_word.id)"
-         class="word" (click)="selectWord(word)">
-             
-             <div>
-                {{word.value}}
-             </div>
-
-             <div class="word-translation">
-                {{word.translation}}
-             </div>
-
-        </div>
-
-        <div [hidden]="!(selected_word != null && word.id == selected_word.id)" 
-            class="word selected" (click)="selectWord(word)">
-             <div>
-                {{word.value}}
-             </div>
-
-             <div class="word-translation">
-                {{word.translation}}
-             </div>
-        </div>
-      </a>
-  </a>
+<span *ngFor="let verse of book.verses" class="col-1-4">
+    <span *ngFor="let word of verse.text" class="col-1-4">
+        <app-verse-word #wordcmp [word]="word" (click)="selectWord(word);"></app-verse-word>
+    </span>
+</span>

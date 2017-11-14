@@ -1,0 +1,25 @@
+<div>
+    <div class="word" [hidden]="isSelected">
+       {{word.value}}
+    </div>
+
+    <div [hidden]="!isSelected" class="selected">
+        {{word.value}}
+     </div>
+
+    <div class="word-translation">
+       {{word.translation}}
+    </div>
+
+</div>
+
+<!-- <div [hidden]="!(selected.id == word.id)" class="selected">
+
+    <div>
+       {{word.value}}
+    </div>
+
+    <div class="word-translation">
+       {{word.translation}}
+    </div>
+</div> -->

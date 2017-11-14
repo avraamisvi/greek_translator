@@ -2,24 +2,12 @@
     margin-right: 20px;
 }
 
-div.word {
-    float: left;
-    margin-left: 5px;
-}
-
-div.word:hover {
-    background-color: cadetblue;
-}
-
-div.selected {
-    background-color: lightblue;
-}
-
-div.selected:hover {
-    background-color: brown;
-}
-
 .word-translation {
     text-align: center;
     font-size: smaller;
+}
+
+app-verse-word {
+    float: left;
+    margin-left: 5px;
 }
