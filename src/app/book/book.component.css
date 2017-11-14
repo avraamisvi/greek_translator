@@ -7,6 +7,19 @@ div.word {
     margin-left: 5px;
 }
 
+div.word:hover {
+    background-color: cadetblue;
+}
+
 div.selected {
     background-color: lightblue;
+}
+
+div.selected:hover {
+    background-color: brown;
+}
+
+.word-translation {
+    text-align: center;
+    font-size: smaller;
 }

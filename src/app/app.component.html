@@ -6,10 +6,10 @@
 </mat-toolbar>
 
   <mat-sidenav #sidenav opened="{{open}}" mode="side">
-      <app-word-entry #wordentry ></app-word-entry>
+      <app-word-entry #wordentry (onSave)="sidenav.toggle();"></app-word-entry>
   </mat-sidenav>
   
-  <app-book (onWordSelected)="wordSelected($event, sidenav)"></app-book>
+  <app-book (onWordSelected)="wordSelected($event, sidenav);wordentry.setSelectedWord($event);"></app-book>
   <!-- <button (click)="sidenav.toggle()" >teste</button> -->
 
   <!-- primary content -->

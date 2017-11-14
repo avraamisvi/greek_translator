@@ -15,7 +15,7 @@ import { BOOK } from '../domain/mock-book';
 export class BookComponent implements OnInit {
 
   book = BOOK;
-  selected_word: number = null;
+  selected_word: Word = null;
 
   @Output() onWordSelected = new EventEmitter<Word>();
   
@@ -25,7 +25,7 @@ export class BookComponent implements OnInit {
   }
 
   selectWord(word: Word) {
-    this.selected_word = word.id;
+    this.selected_word = word;
     this.onWordSelected.emit(word);
     // console.log(word);
   }

@@ -8,3 +8,7 @@ html, body, material-app, mat-sidenav-container {
     width: 100%;
     margin: 10px 10px 10px 10px;
 }
+
+.word_title {
+    text-align: center;
+}

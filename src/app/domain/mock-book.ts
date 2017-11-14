@@ -15,7 +15,7 @@ words_str.forEach((word, index) => {
     }
 
     if(word.indexOf("<m>") <= -1)
-        words.push({id:index, value: word, classes: "word"});
+        words.push({id:index, value: word, classes: "word", translation: "teste"});
 });
 
 const VERSES: Verse[] = [

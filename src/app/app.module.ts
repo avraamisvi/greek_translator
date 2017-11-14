@@ -10,6 +10,9 @@ import { WordEntryComponent } from './word-entry/word-entry.component';
 import { BookComponent } from './book/book.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button'
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import {MatInputModule} from '@angular/material/input';
     MatToolbarModule,
     MatSidenavModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
