@@ -27,7 +27,7 @@ export class WordEntryComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
-  word: Word = {value:"", id:-1, classes:"word", transalation:""};//@Input() 
+  word: Word = {value:"", id:-1, classes:"word", translation:""};//@Input() 
   grammarTags = [];
   validGrammarTags = ["1 pessoa", "singular", "nominativo"];
   error: string = null;
