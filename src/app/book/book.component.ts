@@ -5,12 +5,14 @@ import {Verse} from '../domain/verse';
 import {Word} from '../domain/word';
 
 import { BOOK } from '../domain/mock-book';
+import { BookWordServiceService } from '../book-word-service.service';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers:[BookWordServiceService]
 })
 export class BookComponent implements OnInit {
 
@@ -19,7 +21,9 @@ export class BookComponent implements OnInit {
 
   @Output() onWordSelected = new EventEmitter<Word>();
   
-  constructor() { }
+  constructor(private service: BookWordServiceService) { 
+    service.confirmed$.subscribe(w => console.log(w.value));
+  }
 
   ngOnInit() {
   }
@@ -27,6 +31,7 @@ export class BookComponent implements OnInit {
   selectWord(word: Word) {
     this.selectedWord = word;
     this.onWordSelected.emit(word);
+    this.service.announce(word);
     // console.log(word);
   }
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -31,7 +31,8 @@ import { VerseWordComponent } from './verse-word/verse-word.component'
     MatInputModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

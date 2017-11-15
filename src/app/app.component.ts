@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Greek Translator';
   open = false;
   selectedWord: Word = null;
+  books: []
   
   // @Output() onWordSelected = new EventEmitter<Word>();
 
