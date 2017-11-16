@@ -1,18 +1,19 @@
-<h2 class="word_title">{{word.value}}</h2>
+<h2 class="word_title">{{word?.value}}</h2>
 
 <div class="form-container">
     <mat-form-field class="form-field">
-        <input matInput placeholder="Translation">
+        <input matInput placeholder="Translation" [(ngModel)]="translation.value">
     </mat-form-field>
-
+    
     <mat-form-field class="form-field">
-        <textarea matInput placeholder="Note/Explanation" ></textarea>
+        <textarea matInput placeholder="Note/Explanation" [(ngModel)]="translation.note">
+        </textarea>
     </mat-form-field>
 
     <mat-form-field class="form-field" >
         <mat-chip-list #chipList>
           
-          <mat-chip *ngFor="let entry of grammarTags" [selectable]="selectable"
+          <mat-chip *ngFor="let entry of translation?.grammarTags" [selectable]="selectable"
                    [removable]="removable" (remove)="remove(entry)">
             {{entry.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -23,7 +24,7 @@
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [matChipInputAddOnBlur]="addOnBlur"
                  (matChipInputTokenEnd)="add($event)" 
-                 value="{{word.transalation}}"
+                 value="{{grammarInput}}"
                  />
 
         </mat-chip-list>

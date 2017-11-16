@@ -11,3 +11,8 @@ app-verse-word {
     float: left;
     margin-left: 5px;
 }
+
+.verse-number {
+    font-size: 25px;
+    margin-left: 10px;    
+}

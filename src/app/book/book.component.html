@@ -1,5 +1,10 @@
-<span *ngFor="let verse of book.verses" class="col-1-4">
-    <span *ngFor="let word of verse.text" class="col-1-4">
-        <app-verse-word #wordcmp [word]="word" (click)="selectWord(word);"></app-verse-word>
+<span *ngIf="chapter">
+
+    <span *ngFor="let verse of chapter.verses" class="col-1-4">
+        <div class="verse-number">{{verse?.verse}}</div>
+        <span *ngFor="let word of verse.text" class="col-1-4">
+            <app-verse-word #wordcmp [word]="word" (click)="selectWord(word);"></app-verse-word>
+        </span>
     </span>
+
 </span>

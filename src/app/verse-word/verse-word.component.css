@@ -14,3 +14,9 @@ div.selected {
 div.selected:hover {
     background-color: brown! important;
 }
+
+.word-translation {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}

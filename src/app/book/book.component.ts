@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, Input } from '@angular/core';
 
 import {Book} from '../domain/book';
 import {Verse} from '../domain/verse';
 import {Word} from '../domain/word';
 
-import { BOOK } from '../domain/mock-book';
 import { BookWordServiceService } from '../book-word-service.service';
+import { Chapter } from '../domain/chapter';
 
 @Component({
   selector: 'app-book',
@@ -16,13 +16,28 @@ import { BookWordServiceService } from '../book-word-service.service';
 })
 export class BookComponent implements OnInit {
 
-  book = BOOK;
+  book: Book;
+  chapter: Chapter;
   selectedWord: Word = null;
 
   @Output() onWordSelected = new EventEmitter<Word>();
   
   constructor(private service: BookWordServiceService) { 
     service.confirmed$.subscribe(w => console.log(w.value));
+  }
+
+  @Input()
+  set currentBook(book: Book) {
+    this.book = book;
+  }
+
+  @Input()
+  set currentChapter(chapter: Chapter) {
+    this.chapter = chapter;
+  }
+
+  get currentChapter() {
+    return this.chapter;
   }
 
   ngOnInit() {

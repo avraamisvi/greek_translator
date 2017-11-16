@@ -1,5 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Word } from './domain/word';
+import { Book } from './domain/book';
+
+import { BOOK } from './domain/mock-book';
+import { Chapter } from './domain/chapter';
+import { TranslationProject } from './domain/translation';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +12,48 @@ import { Word } from './domain/word';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'Greek Translator';
+
   open = false;
   selectedWord: Word = null;
-  books: []
   
-  // @Output() onWordSelected = new EventEmitter<Word>();
+  translation: TranslationProject = null;
+  translations: TranslationProject[] = [];
+
+  books: Book[] = [
+    {name: "Κατά Ματθαίον", number: 1, chapters: []},
+    {name: "Κατά Μάρκον", number: 1, chapters: []},
+    {name: "Πράξεις Αποστόλων", number: 1, chapters: []},
+    BOOK
+  ];
+  
+  currentBook: Book = this.books[0];
+  currentChapter: Chapter;
+
+  set selectedBook(book: Book) {
+    this.currentBook = book;
+    this.currentChapter = book.chapters[0];
+  }
+
+  set currentTranslation(transl: TranslationProject) {
+    this.translation = transl;
+  }
+
+  saveTranslation(name: string) {
+    this.translation = {id: 1, name: name};
+    // TODO salvar no remoto
+    this.translations.push(this.translation);
+  }
+
+  selectTranslationView() {
+    this.translation = null;//reload translations
+  }
 
   wordSelected(word: Word, sidenav:any) {
     console.log(sidenav.opened);
     
-    if(!sidenav.opened)
+    if(!sidenav.opened)//TODO change this to service
       sidenav.toggle();
 
     this.selectedWord = word;

@@ -5,6 +5,7 @@ import { Word } from '../domain/word';
 
 import {MatChipInputEvent} from '@angular/material';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
+import { Translation, GrammarTag } from '../domain/translation';
 
 // import { MatSidenavModule } from '@angular/material/sidenav';
 
@@ -27,11 +28,20 @@ export class WordEntryComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
-  word: Word = {value:"", id:-1, classes:"word", translation:""};//@Input() 
+  word: Word;//@Input() 
   grammarTags = [];
+  grammarInput: string;
   validGrammarTags = ["1 pessoa", "singular", "nominativo"];
   error: string = null;
-  //The grammar definition does not exist.
+
+  translation: Translation = {id:-1, 
+                              note: "no note", 
+                              value: "no value", 
+                              grammarTags: [], 
+                              wordOrder: 1,
+                              book: 1,
+                              chapter: 1,
+                              verse: 1};
 
   constructor() { }
 
@@ -40,6 +50,30 @@ export class WordEntryComponent implements OnInit {
 
   setSelectedWord(word: Word) {
     this.word = word;
+
+    //TODO get translation 
+    this.translation = word.translation = {id:-1, 
+                        note: "", 
+                        value: "_____", 
+                        grammarTags: [], 
+                        wordOrder: 1,
+                        book: word.verse.book_number,
+                        chapter: word.verse.chapter,
+                        verse: word.verse.verse};
+  }
+
+  @Input()
+  set translationValue(value: string) {
+    if(this.translation)
+      this.translation.value = value;
+
+    console.log(value);
+  }
+
+  get translationValue() {
+    if(this.translation)
+      return this.translation.value;
+    return null;
   }
 
   add(event: MatChipInputEvent): void {
@@ -50,7 +84,7 @@ export class WordEntryComponent implements OnInit {
     if ((value || '').trim()) {
 
       // if(this.validGrammarTags.find((el)=>{return el == value;})) {
-        this.grammarTags.push({ name: value.trim() });
+        this.translation.grammarTags.push({  name: value.trim(), description: "" });
       // } else {
       //   this.error = 'The grammar definition ' + value + ' does not exist.'
       // }
@@ -72,6 +106,8 @@ export class WordEntryComponent implements OnInit {
   save() {
     //TODO enviar para o servidor
     this.onSave.emit(true);
+    console.log("save");
+    console.log(this.translation);
   }
 
 }

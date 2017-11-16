@@ -2,16 +2,89 @@
 <mat-sidenav-container>
 
 <mat-toolbar>
-  <span>{{title}}</span>
+    <button mat-mini-fab color="primary" (click)="selectTranslationView()">
+        <mat-icon aria-label="Example icon-button with a heart icon">menu</mat-icon>
+    </button>
+
+  <span style="margin-left: 10px;">{{title}}</span>
 </mat-toolbar>
 
   <mat-sidenav #sidenav opened="{{open}}" mode="side">
       <app-word-entry #wordentry (onSave)="sidenav.toggle();"></app-word-entry>
   </mat-sidenav>
-  
-  <app-book (onWordSelected)="wordSelected($event, sidenav);wordentry.setSelectedWord($event);"></app-book>
-  <!-- <button (click)="sidenav.toggle()" >teste</button> -->
 
+  <div [hidden]="translation!=null" class="translation_panel">
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Select Translation
+            </mat-panel-title>
+            <mat-panel-description>
+                Select a existing translation.
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          
+          <mat-form-field class="book-menu-chapter-selector">
+              <mat-select placeholder="Translation" [(value)]="currentTranslation">
+                <mat-option *ngFor="let tls of translations" [value]="tls">
+                  {{ tls.name }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+                  
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                New Translation
+            </mat-panel-title>
+            <mat-panel-description>
+              Create a new translation.
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+              <input #inputname matInput placeholder="Translation" value="My New Translation">
+          </mat-form-field>
+            
+          <button (click)="saveTranslation(inputname.value)" mat-raised-button color="primary">Save</button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+  </div>
+
+
+  <div [hidden]="translation==null">
+    <div class="book-menu">
+
+        <div class="book-menu">
+
+          <mat-form-field class="book-menu-selector">
+            <mat-select placeholder="Book" [(value)]="selectedBook">
+              <mat-option *ngFor="let book of books" [value]="book">
+                {{ book.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+            <mat-form-field class="book-menu-chapter-selector">
+              <mat-select placeholder="Chapter" [(value)]="currentChapter">
+                <mat-option *ngFor="let chapter of currentBook.chapters" [value]="chapter">
+                  {{ chapter.number }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <app-book #bookComponent [currentChapter]="currentChapter" (onWordSelected)="wordSelected($event, sidenav);wordentry.setSelectedWord($event);"></app-book>
+  <!-- <button (click)="sidenav.toggle()" >teste</button> -->
+  </div>
   <!-- primary content -->
 </mat-sidenav-container>
 
