@@ -11,6 +11,7 @@ export class GrammarTag {
 export class Translation {
     id: number;
     value: string;
+    word: string;
     wordOrder: number;
     note: string;
     verse: number;

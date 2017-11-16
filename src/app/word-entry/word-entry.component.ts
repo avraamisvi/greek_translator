@@ -41,7 +41,9 @@ export class WordEntryComponent implements OnInit {
                               wordOrder: 1,
                               book: 1,
                               chapter: 1,
-                              verse: 1};
+                              verse: 1,
+                              word: ""
+                              };
 
   constructor() { }
 
@@ -59,7 +61,8 @@ export class WordEntryComponent implements OnInit {
                         wordOrder: 1,
                         book: word.verse.book_number,
                         chapter: word.verse.chapter,
-                        verse: word.verse.verse};
+                        verse: word.verse.verse,
+                        word: word.value};
   }
 
   @Input()

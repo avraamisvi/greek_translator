@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
+import {HttpClientModule} from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -16,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { VerseWordComponent } from './verse-word/verse-word.component'
 import {MatExpansionModule} from '@angular/material/expansion';
+import { VerseRemoteServiceService } from './verse-remote-service.service';
+import { BookRemoteService } from './book-remote.service';
 
 @NgModule({
   declarations: [
@@ -36,9 +40,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatButtonModule,
     MatSelectModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [VerseRemoteServiceService, BookRemoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

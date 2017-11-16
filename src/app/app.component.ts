@@ -5,6 +5,7 @@ import { Book } from './domain/book';
 import { BOOK } from './domain/mock-book';
 import { Chapter } from './domain/chapter';
 import { TranslationProject } from './domain/translation';
+import { BookRemoteService } from './book-remote.service';
 
 @Component({
   selector: 'app-root',
@@ -21,15 +22,23 @@ export class AppComponent {
   translation: TranslationProject = null;
   translations: TranslationProject[] = [];
 
-  books: Book[] = [
-    {name: "Κατά Ματθαίον", number: 1, chapters: []},
-    {name: "Κατά Μάρκον", number: 1, chapters: []},
-    {name: "Πράξεις Αποστόλων", number: 1, chapters: []},
-    BOOK
-  ];
+  books: Book[];
+  //  = [
+  //   {name: "Κατά Ματθαίον", number: 1, chapters: []},
+  //   {name: "Κατά Μάρκον", number: 1, chapters: []},
+  //   {name: "Πράξεις Αποστόλων", number: 1, chapters: []},
+  //   BOOK
+  // ];
   
-  currentBook: Book = this.books[0];
+  currentBook: Book;// = this.books[0];
   currentChapter: Chapter;
+
+  constructor(private bookService: BookRemoteService) {
+    bookService.list().subscribe((bks)=>{
+      this.books = bks;
+      this.currentBook = bks[0];
+    });
+  }
 
   set selectedBook(book: Book) {
     this.currentBook = book;

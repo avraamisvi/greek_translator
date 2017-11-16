@@ -28,7 +28,7 @@ words_str.forEach((word, index) => {
         words.push({id:index, 
                     value: word, 
                     classes: "word", 
-                    translation: {value: "_____"},
+                    translation: null,
                     verse: VERSES[0]
                 });
 });

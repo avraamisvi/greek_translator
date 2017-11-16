@@ -73,7 +73,7 @@
 
             <mat-form-field class="book-menu-chapter-selector">
               <mat-select placeholder="Chapter" [(value)]="currentChapter">
-                <mat-option *ngFor="let chapter of currentBook.chapters" [value]="chapter">
+                <mat-option *ngFor="let chapter of currentBook?.chapters" [value]="chapter">
                   {{ chapter.number }}
                 </mat-option>
               </mat-select>
