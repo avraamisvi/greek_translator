@@ -18,7 +18,10 @@ export class VerseWordComponent implements OnInit {
   selected: boolean = false;
 
   constructor(private service: BookWordServiceService) {
-    this.service.announced$.subscribe(w => this.selected = w.id == this.word.id);
+    this.service.announced$.subscribe((w) => {
+      this.selected = (w.id == this.word.id && this.word.verse.verse == w.verse.verse);
+
+    });
   }
 
   ngOnInit() {

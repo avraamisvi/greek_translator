@@ -6,6 +6,7 @@ import { BOOK } from './domain/mock-book';
 import { Chapter } from './domain/chapter';
 import { TranslationProject } from './domain/translation';
 import { BookRemoteService } from './book-remote.service';
+import { VerseRemoteServiceService } from './verse-remote-service.service';
 
 @Component({
   selector: 'app-root',
@@ -33,16 +34,30 @@ export class AppComponent {
   currentBook: Book;// = this.books[0];
   currentChapter: Chapter;
 
-  constructor(private bookService: BookRemoteService) {
+  constructor(private bookService: BookRemoteService, 
+    private verseService: VerseRemoteServiceService) {
+
     bookService.list().subscribe((bks)=>{
+      console.log(bks);
       this.books = bks;
-      this.currentBook = bks[0];
+      // this.currentBook = bks[0];
     });
   }
 
   set selectedBook(book: Book) {
-    this.currentBook = book;
-    this.currentChapter = book.chapters[0];
+    // this.currentBook = book;
+
+    this.verseService.getVerses(book).subscribe( (chps) => {
+      this.currentBook = {
+        chapters: chps,
+        name: book.name,
+        number: book.number
+      };
+
+      this.currentChapter = this.currentBook.chapters[0];
+    });
+
+    
   }
 
   set currentTranslation(transl: TranslationProject) {
