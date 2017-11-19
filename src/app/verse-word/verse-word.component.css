@@ -19,4 +19,5 @@ div.selected:hover {
     text-align: center;
     font-size: 12px;
     margin-top: 5px;
+    color: brown;
 }

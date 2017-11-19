@@ -6,6 +6,8 @@ import { Word } from '../domain/word';
 import {MatChipInputEvent} from '@angular/material';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { Translation, GrammarTag } from '../domain/translation';
+import { TranslationRemoteService } from '../translation-remote.service';
+import { GrammarRemoteService } from '../grammar-remote.service';
 
 // import { MatSidenavModule } from '@angular/material/sidenav';
 
@@ -45,37 +47,52 @@ export class WordEntryComponent implements OnInit {
                               word: ""
                               };
 
-  constructor() { }
+  constructor(private translationService: TranslationRemoteService, 
+    private grammarService: GrammarRemoteService) { }
 
   ngOnInit() {
   }
 
   setSelectedWord(word: Word) {
     this.word = word;
+    this.translation = word.translation;
+    this.grammarService.list(this.translation).subscribe((res)=>{
+      if(res) 
+        this.translation.grammarTags = res;
+      else 
+      this.translation.grammarTags = [];
+    });
+    console.log("select word");
+    console.log(this.translation);
 
-    //TODO get translation 
-    this.translation = word.translation = {id:-1, 
-                        note: "", 
-                        value: "_____", 
-                        grammarTags: [], 
-                        wordOrder: 1,
-                        book: word.verse.book_number,
-                        chapter: word.verse.chapter,
-                        verse: word.verse.verse,
-                        word: word.value};
+    // this.translationService.getTranslation(word).subscribe(ret => word.translation = this.translation = ret);
+
+    // //TODO get translation 
+    // this.translation = word.translation = {
+    //                     id:-1,
+    //                     note: "",
+    //                     value: "",
+    //                     grammarTags: [],
+    //                     wordOrder: 1,
+    //                     book: word.verse.book_number,
+    //                     chapter: word.verse.chapter,
+    //                     verse: word.verse.verse,
+    //                     word: word.value };
   }
 
   @Input()
   set translationValue(value: string) {
+    
     if(this.translation)
       this.translation.value = value;
 
-    console.log(value);
   }
 
-  get translationValue() {
+  get translationValue() {//TODO
+    
     if(this.translation)
       return this.translation.value;
+
     return null;
   }
 
@@ -99,18 +116,36 @@ export class WordEntryComponent implements OnInit {
   }
 
   remove(fruit: any): void {
-    let index = this.grammarTags.indexOf(fruit);
+    let index = this.translation.grammarTags.indexOf(fruit);
 
     if (index >= 0) {
-      this.grammarTags.splice(index, 1);
+      this.translation.grammarTags.splice(index, 1);
     }
   }
 
   save() {
+    
     //TODO enviar para o servidor
+    
     this.onSave.emit(true);
-    console.log("save");
-    console.log(this.translation);
+
+    if(this.translation.id == -1) {
+
+      console.log("save");
+      console.log(this.translation);
+
+      this.translationService.createTranslation(this.translation).subscribe((res)=>{
+        this.translation.id = res.data;
+        console.log(res);
+      });
+    } else {
+      console.log("update");
+      console.log(this.translation);
+
+      this.translationService.createTranslation(this.translation).subscribe((res)=>{
+        console.log(res);
+      });
+    }
   }
 
 }

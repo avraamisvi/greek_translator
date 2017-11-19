@@ -15,7 +15,7 @@ export class BookRemoteService {
       console.log("aqui");
         this.http.get<any>("http://localhost:3000/book/list").subscribe((items)=>{
           
-          console.log(items);
+          //console.log(items);
 
           let books: Book[] = [];
 

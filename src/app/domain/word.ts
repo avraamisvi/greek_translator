@@ -8,4 +8,5 @@ export class Word {
     classes: string;
     translation: Translation;
     verse: Verse;
+    order: number;
 }

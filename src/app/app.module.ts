@@ -20,6 +20,8 @@ import { VerseWordComponent } from './verse-word/verse-word.component'
 import {MatExpansionModule} from '@angular/material/expansion';
 import { VerseRemoteServiceService } from './verse-remote-service.service';
 import { BookRemoteService } from './book-remote.service';
+import { TranslationRemoteService } from './translation-remote.service';
+import { GrammarRemoteService } from './grammar-remote.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { BookRemoteService } from './book-remote.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [VerseRemoteServiceService, BookRemoteService],
+  providers: [VerseRemoteServiceService, BookRemoteService, TranslationRemoteService, GrammarRemoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
