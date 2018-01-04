@@ -16,7 +16,7 @@ import { TranslationRemoteService } from './translation-remote.service';
 })
 export class AppComponent {
 
-  title = 'Greek Translator';
+  title = 'Greek Translator (version : 0.0.1.alpha )';
 
   open = false;
   selectedWord: Word = null;
@@ -46,6 +46,7 @@ export class AppComponent {
     });
 
     translationService.listProjects().subscribe((ret)=>{
+      console.log(ret);
       this.translations = ret;
     });
   }
